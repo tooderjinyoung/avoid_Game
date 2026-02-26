@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include	"Player.h"
 #include "Time.h"
-
+#include <string>
 
 
 int  w = 800;
@@ -15,6 +15,7 @@ int main()
 	
 	sf::Clock clock;
 	sf::RenderWindow window;
+	Time time;
 
 	// hp/speed/damage
 	Player player(100, 5.0f, 10);
@@ -22,8 +23,9 @@ int main()
 	window.setFramerateLimit(60);
 	while (window.isOpen())
 	{
-		Time time(GameManager::getInstance().getGameTime());
-		
+		GameManager::getInstance().update();
+		sf::String currentTime = time.getTimeString(GameManager::getInstance().getGameTime());
+
 
 		while (const std::optional event = window.pollEvent())
 		{
@@ -46,20 +48,20 @@ int main()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && isRunning) {
 			player.move(-1.0f);
-			player.animate("Run",8, 0.08f);
+			player.animate("Run",8, 0.1f);
 			
 			}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && isRunning) {
 			player.move(1.0f);
-			player.animate("Run",8, 0.08f);
+			player.animate("Run",8,0.1f);
 			}
 		else {
 			player.animate("Idle", 2, 0.5f);
 		}
 		window.clear(sf::Color::White);
-		GameManager::getInstance().PauseDraw(window);
+		if (!isRunning)		GameManager::getInstance().textDraw(window, "Pasue", 80, 400, 250, sf::Color::Red);
+		GameManager::getInstance().textDraw(window,currentTime, 50, 400, 20, sf::Color::Black);
 		player.draw(window);
-		time.draw(window);
 		window.display();
 	}
 }
