@@ -6,10 +6,14 @@ class Time
 {
 	private:
 
-		int minutes;
-		int seconds;
+		int minutes = 0;
+		int seconds = 0;
 	public:
-		Time() {}
+		Time() {
+			
+			this->minutes = 0;
+			this ->seconds = 0;
+		}
 
 		std::string getTimeString(float totalSeconds)
 		{
@@ -20,5 +24,13 @@ class Time
 			return (minutes < 10 ? "0" : "") + std::to_string(minutes) + ":" +
 				(seconds < 10 ? "0" : "") + std::to_string(seconds);
 		}
+
+		int getMinutes(){
+			return minutes;
+		}
+		int getSeconds() {
+			return seconds;
+		}
+
 };
 

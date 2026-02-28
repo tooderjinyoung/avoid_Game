@@ -10,7 +10,7 @@
 #include "GameManager.h"
 
 using namespace std;
-bool isRunning = true;
+extern bool isRunning;
 class GameManager {
 private:
 	GameManager() {
@@ -48,7 +48,7 @@ public:
 	}
 	// 게임 전체 경과 시간을 가져오는 함수입니다.
 	float getGameTime(){
-		if (!isRunning) return gameTime;
+		return gameTime;
 	}
 
 	void textDraw(sf::RenderWindow& window,std::string String, int size, float posx, float posy,sf:: Color color)
