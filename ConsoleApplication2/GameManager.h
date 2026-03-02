@@ -66,4 +66,5 @@ public:
 		window.draw(text);
 
 	}
+
 };
